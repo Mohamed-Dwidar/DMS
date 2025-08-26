@@ -16,17 +16,17 @@ return new class extends Migration
             $table->string('name');
             $table->bigInteger('customer_id')->default(0);
             $table->string('inv_number')->unique();
-            $table->date('date');
+            $table->date('inv_date')->default(date('Y-m-d'));
             $table->string('inv_for');
             
-            $table->decimal('amount', 10, 2);
+            $table->decimal('inv_amount', 10, 2)->default(0);
             $table->decimal('inv_discount_per', 5, 2)->default(0);
             $table->decimal('inv_discount', 10, 2)->default(0);
-            $table->decimal('tax_vat_per', 5, 2);
-            $table->decimal('tax_vat', 10, 2);
-            $table->decimal('tax_withdrawal_per', 5, 2);
-            $table->decimal('tax_withdrawal', 10, 2);
-            $table->decimal('total_amount', 10, 2);
+            $table->decimal('tax_vat_per', 5, 2)->default(0);
+            $table->decimal('tax_vat', 10, 2)->default(0);
+            $table->decimal('tax_withdrawal_per', 5, 2)->default(0);
+            $table->decimal('tax_withdrawal', 10, 2)->default(0);
+            $table->decimal('inv_total_amount', 10, 2)->default(0);
 
             $table->string('status');
             $table->timestamps();

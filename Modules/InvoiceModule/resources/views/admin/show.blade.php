@@ -1,89 +1,276 @@
 @extends('layoutmodule::main')
 
 @section('title')
-اضافه صفحة جديدة
+    INVOICE
 @endsection
 
 @section('content')
+    <style>
+        .invoice-invoice-container {
+            width: 210mm;
+            max-width: 100vw;
+            margin: 0 auto;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
 
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
 
-<div class="content-wrapper container-fluid">
-    <div class="content-header">
-        <div class="content-header-left mb-2 breadcrumb-new col">
-            <h3>
-                {{$invoice->title}}
-            </h3>
+        .invoice-logo {
+            align-self: flex-start;
+            width: 200px;
+            height: 100px;
+            /* background: #e3f2fd; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1976d2;
+            border-radius: 10px;
+            margin-bottom: .9rem;
+            padding-left: 11px;
+        }
+
+        .invoice-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .invoice-company-details {
+            color: #333;
+            font-size: 0.97rem;
+            line-height: 1.3;
+            margin-left: 0.5rem;
+        }
+
+        .invoice-title-block {
+            text-align: right;
+            min-width: 250px;
+            margin-top: 28px;
+        }
+
+        .invoice-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 1.5rem;
+        }
+
+        .invoice-title-block .invoice-meta {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 0.2rem;
+        }
+
+        .invoice-bill-section {
+            margin-top: 6rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .invoice-bill-label {
+            color: #1976d2;
+            font-weight: bold;
+            font-size: 1rem;
+            /* letter-spacing: 1px; */
+        }
+
+        .invoice-client-name {
+            font-weight: bold;
+            font-size: 1.15rem;
+            color: #222;
+        }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .invoice-table th {
+            background: #1976d2;
+            color: #fff;
+            font-weight: bold;
+            padding: 0.8rem;
+            border: none;
+            font-size: .9rem;
+        }
+
+        .invoice-table th:not(:first-child),
+        .invoice-table td:not(:first-child) {
+            text-align: center;
+        }
+
+        .invoice-table th:first-child,
+        .invoice-table td:first-child {
+            text-align: left;
+            width: 50%;
+        }
+
+        .invoice-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: .9rem;
+            vertical-align: middle;
+        }
+
+        .invoice-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .invoice-table td.amount,
+        .invoice-table td.qty,
+        .invoice-table td.unit {
+            text-align: center;
+        }
+
+        .invoice-summary {
+            text-align: right;
+            margin-bottom: 2rem;
+        }
+
+        .invoice-summary-row {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .invoice-summary-row.total {
+            font-weight: bold;
+            color: #1976d2;
+            font-size: 1.3rem;
+        }
+
+        .invoice-footer {
+            margin-top: 5rem;
+            text-align: right;
+            margin-bottom: 9rem;
+        }
+
+        .invoice-signature {
+            color: #1976d2;
+            font-weight: bold;
+            font-size: 1.1rem;
+            /* border-top: 2px solid #1976d2; */
+            /* width: 220px; */
+            margin: 3rem 3rem 0 auto;
+            padding-top: 1rem;
+        }
+
+        .thanks-note {
+            text-align: center;
+            font-size: .9rem;
+            color: #1976d2;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .invoice-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .invoice-title-block {
+                text-align: left;
+                margin-top: .9rem;
+            }
+
+            .invoice-summary {
+                text-align: left;
+            }
+        }
+    </style>
+    <div class="content-wrapper container-fluid">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4>{{ $invoice->name }}</h4>
+
+                <div class="d-flex gap-2">
+                    <a class="btn btn-info" href="{{ route('invoices.show_invoice_pdf', $invoice->id) }}" target="_blank"><i
+                            class="fas fa-file-pdf"></i></a>
+                    <a class="btn btn-primary" href="{{ route('invoices.edit', $invoice->id) }}"><i
+                            class="fas fa-edit"></i></a>
+                    <a class="btn btn-danger" href="{{ route('invoices.delete', $invoice->id) }}"><i
+                            class="fas fa-trash"></i></a>
+                </div>
+            </div>
         </div>
-    </div>
-
-    @include('layoutmodule::flash')
-
-    <div class="content-body">
-        <div class="row">
-            <div class="col-lg-12 col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            {{-- <div class="col-5">
-                                <h2> الدورات</h2>
-                            </div> --}}
-                            <div class="col-lg-10"></div>
-                            <div class="col-lg-2">
-                                {{-- <a class="btn btn-success" href="{{route('invoices.add_date',$invoice->id)}}"
-                                role="button">أضافه موعد جديد</a> --}}
-                                <a class="btn btn-warning" href="{{route('invoices.edit',$invoice->id)}}"
-                                    role="button">{{__('messages.edit')}}</a>
-                                <a href="{{ route('invoices.delete',[$invoice->id])}}"
-                                    onclick="return confirm('هل انت متأكد انك تريد Remove هذه الصفحة ؟')"
-                                    class="btn btn-danger" role="button">{{__('messages.delete')}}</a>
+        <div class="card-body">
+            <div class="card-block">
+                <div class="row">
+                    <div class="invoice-invoice-container">
+                        <div class="invoice-header">
+                            <div>
+                                <div class="invoice-logo" style="margin-bottom: 0.5rem;">
+                                    <img src="{{ asset('assets/images/logo-h.png') }}" alt="Logo">
+                                </div>
+                                <div class="invoice-company-details">
+                                    Pivot for business and administrative solutions<br>
+                                    Tax ID : 636-336-867<br>
+                                    Reg# : 17090<br>
+                                    696 El Houria st. - Louran<br>
+                                    Alexandria - Egypt<br>
+                                    info@pivotcoworkingspace.com<br>
+                                    +20 122 642 0549 / +20 03 580 5611
+                                </div>
+                            </div>
+                            <div class="invoice-title-block">
+                                <div class="invoice-title">INVOICE</div>
+                                <div class="invoice-meta"><b>INVOICE # :</b> {{ $invoice->inv_number }}</div>
+                                <div class="invoice-meta"><b>DATE :</b> {{ $invoice->inv_date }}</div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="card-body">
-                        <div class="card-block">
-                            <dl class="row">
-                                <dt class="col-sm-12" style="text-align: center;margin-bottom: 20px">
-                                    @if($invoice->image != null)
-                                    <img src="{{url('uploads/invoices/' . $invoice->image)}}" width="250px" />
-                                    @else
-                                    <img src="{{url('uploads/invoices/default.png')}}" width="100px" height="100px" />
-                                    @endif
-                                </dt>
-                                <dt class="col-sm-3">اسم الصفحة</dt>
-                                <dd class="col-sm-9">{{$invoice->title}}</dd>
-
-                                <dt class="col-sm-3">الصفحة الاعلي</dt>
-                                <dd class="col-sm-9">
-                                    @if($invoice->parent_id == 0)
-                                    --
-                                    @else
-                                    {{$invoice->parent->title}}
-                                    @endif                                    
-                                </dd>
-
-                                <dt class="col-sm-3">تفاصيل الصفحة</dt>
-                                <dd class="col-sm-9">{!!$invoice->content!!}</dd>
-                            </dl>
+                        <div class="invoice-bill-section">
+                            <div class="invoice-bill-label">FOR</div>
+                            <div class="invoice-client-name">{{ $invoice->inv_for }}</div>
+                        </div>
+                        <table class="invoice-table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th class="qty">Qty</th>
+                                    <th class="unit">Unit Amount</th>
+                                    <th>Discount</th>
+                                    <th class="amount">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($invoice->invoiceItems as $item)
+                                    <tr>
+                                        <td>{{ $item['item_name'] }}</td>
+                                        <td class="qty">{{ $item['item_qty'] }}</td>
+                                        <td class="unit">{{ $item['item_unit_amount'] }} LE</td>
+                                        <td>{{ $item['item_discount'] ?? '-' }}</td>
+                                        <td class="amount">{{ $item['item_total_amount'] }} LE</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <div class="invoice-summary">
+                            <div class="invoice-summary-row"><b>Subtotal :</b> {{ $invoice->inv_amount }} LE</div>
+                            <div class="invoice-summary-row"><b>Tax VAT :</b> {{ $invoice->tax_vat }} LE</div>
+                            <div class="invoice-summary-row total">Total : {{ $invoice->inv_total_amount }} LE</div>
+                        </div>
+                        <div class="invoice-footer">
+                            <div class="invoice-signature">Signature</div>
                         </div>
 
-                         
+                        <div class="thanks-note">
+                            THANK YOU FOR YOUR BUSINESS!
+                        </div>
+
                     </div>
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-
 @endsection

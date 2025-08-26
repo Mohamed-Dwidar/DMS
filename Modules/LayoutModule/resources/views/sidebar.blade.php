@@ -26,7 +26,7 @@
                 <li class="pc-item">
                     <a href="{{ route('invoices') }}" class="pc-link">
                         <span class="pc-micon">
-                            <i class="ph-duotone ph-map-pin"></i>
+                            <i class="ph-duotone ph-files"></i>
                         </span>
                         <span class="pc-mtext"
                             data-i18n="{{ __('messages.invoices') }}">{{ __('messages.invoices') }}</span>

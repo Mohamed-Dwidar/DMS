@@ -22,13 +22,16 @@
             <table class="table">
                 <thead>
                     <tr>
-                        {{-- <th class="align-middle">{{ __('messages.invoice_number') }}</th> --}}
-                        <th class="align-middle">{{ __('messages.invoice_name') }}</th>
-                        <th class="align-middle">{{ __('messages.prices') }}</th>
-                        <th class="align-middle">{{ __('messages.hotel') }}</th>
-                        <th class="align-middle">{{ __('messages.week_start') }}</th>
-                        <th class="align-middle">{{ __('messages.image') }}</th>
-                        <th class="align-middle">{{ __('messages.status') }}</th>
+                        <th class="align-middle">{{ __('messages.invoice_number') }}</th>
+                        <th class="align-middle">{{ __('messages.name') }}</th>
+                        <th class="align-middle">{{ __('messages.invoice_date') }}</th>
+                        <th class="align-middle">{{ __('messages.subtotal') }}</th>
+                        <th class="align-middle">{{ __('messages.discount') }}</th>
+                        <th class="align-middle">{{ __('messages.tax_vat') }}</th>
+                        <th class="align-middle">{{ __('messages.tax_withdrawal') }}</th>
+                        <th class="align-middle">{{ __('messages.total_amount') }}</th>
+
+
                         <th class="align-middle">{{ __('messages.actions') }}</th>
                     </tr>
                 </thead>
@@ -36,36 +39,20 @@
                     @if (!empty($invoices))
                         @foreach ($invoices as $invoice)
                             <tr>
-                                {{-- <td>{{ $invoice->id }}</td> --}}
+                                <td>{{ $invoice->inv_number }}</td>
                                 <td>{{ $invoice->name }}</td>
-                                <td>
-                                </td>
-                                <td>
-                                    {{ $invoice->hotel }}
-                                </td>
-                                <td>
-                                    {{ $invoice->week_start }}
-                                </td>
-                                <td>
-                                    <img src="{{ $invoice->imagePath }}" alt="{{ $invoice->name }}" class="img-fluid"
-                                        style="max-width: 100px; max-height: 100px;">
-                                </td>
-                                <td>
-                                    <div class="form-check form-switch">
-                                        @if ($invoice->is_active)
-                                            <i class="ti ti-check text-success" title="{{ __('messages.active') }}"></i>
-                                        @else
-                                            <i class="ti ti-x text-danger" title="{{ __('messages.inactive') }}"></i>
-                                        @endif
-                                    </div>
-                                </td>
+                                <td>{{ $invoice->inv_date }}</td>
+                                <td>{{ $invoice->inv_amount }}</td>
+                                <td>{{ $invoice->inv_discount }}</td>
+                                <td>{{ $invoice->tax_vat }}</td>
+                                <td>{{ $invoice->tax_withdrawal }}</td>
+                                <td>{{ $invoice->inv_total_amount }}</td>
 
                                 <td style="width: 5%">
                                     <!-- Actions: Edit & Delete -->
                                     <div class="d-flex gap-2">
                                         <!-- Edit Button -->
-                                        <a href="{{ route('invoices.edit', $invoice->id) }}"
-                                            class="btn btn-warning btn-sm">
+                                        <a href="{{ route('invoices.edit', $invoice->id) }}" class="btn btn-warning btn-sm">
                                             <i class="ti ti-pencil"></i>
                                         </a>
 

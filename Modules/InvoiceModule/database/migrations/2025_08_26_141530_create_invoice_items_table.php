@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('invoice_id')->default(0);
             $table->string('item_name');
-            $table->integer('quantity')->default(1);            
-            $table->decimal('unit_amount', 10, 2);
-            $table->decimal('discount_per', 5, 2)->default(0);
-            $table->decimal('discount', 10, 2)->default(0);
-            $table->decimal('total_amount', 10, 2);
+            $table->text('item_desc')->nullable();
+            $table->integer('item_qty')->default(1);            
+            $table->decimal('item_unit_amount', 10, 2)->default(0);
+            $table->decimal('item_discount_per', 5, 2)->default(0);
+            $table->decimal('item_discount', 10, 2)->default(0);
+            $table->decimal('item_total_amount', 10, 2)->default(0);
             $table->string('note')->nullable();
         });
     }

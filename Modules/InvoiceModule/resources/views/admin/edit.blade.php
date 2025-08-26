@@ -9,176 +9,170 @@
 
 @section('content')
     <div class="card-header">
-        <h4>{{ __('messages.update_invoice') }}</h4>
+        <h4>{{ __('messages.edit_invoice') }}</h4>
     </div>
     <form class="" method="POST" action='{{ route('invoices.update', $invoice->id) }}' enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="id" value="{{ $invoice->id }}">
         <div class="card-body">
             <div class="row mb-3">
+
+                <div class="col-lg-2">
+                    <label class="form-label" for="inv_date">{{ __('messages.invoice_date') }} <span
+                            class="text-danger">*</span></label>
+                    <input type="date" class="form-control" id="inv_date" name="inv_date"
+                        value="{{ old('inv_date', $invoice->inv_date) }}" placeholder="{{ __('messages.invoice_date') }}">
+                </div>
+
+                <div class="col-lg-2">
+                    <label class="form-label" for="payment_method">{{ __('messages.payment_method') }}</label>
+                    <select class="form-select" id="payment_method" name="payment_method">
+                        @foreach ($payment_methods as $method)
+                            <option value="{{ $method }}"
+                                {{ old('payment_method', $invoice->payment_method) == $method ? 'selected' : '' }}>
+                                {{ $method }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            {{-- <div class="row mb-3">
                 <div class="col-lg-6">
-                    <label class="form-label" for="name">{{ __('messages.name') }} <span class="text-danger">*</span></label>
+                    <label class="form-label" for="name">{{ __('messages.name') }} <span
+                            class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="name" name="name"
                         value="{{ old('name', $invoice->name) }}" placeholder="{{ __('messages.name') }}">
                 </div>
-            </div>
+            </div> --}}
+
             <div class="row mb-3">
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label class="form-label" for="country">{{ __('messages.country') }} <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="country" name="country"
-                            value="{{ old('country', $invoice->country) }}" placeholder="{{ __('messages.country') }}">
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label class="form-label" for="hotel">{{ __('messages.hotel') }}</label>
-                        <input type="text" class="form-control" id="hotel" name="hotel"
-                            value="{{ old('hotel', $invoice->hotel) }}" placeholder="{{ __('messages.hotel') }}">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label class="form-label" for="hotel_link">{{ __('messages.hotel_link') }}</label>
-                        <input type="text" class="form-control" id="hotel_link" name="hotel_link"
-                            value="{{ old('hotel_link', $invoice->hotel_link) }}"
-                            placeholder="{{ __('messages.hotel_link') }}">
-                    </div>
+                <div class="col-lg-6">
+                    <label class="form-label" for="inv_for">{{ __('messages.invoice_for') }} <span
+                            class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="inv_for" name="inv_for"
+                        value="{{ old('inv_for', $invoice->inv_for) }}" placeholder="{{ __('messages.invoice_for') }}">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label class="form-label" for="price_1w">{{ __('messages.price_one_week') }} <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="price_1w" name="price_1w"
-                            value="{{ old('price_1w', $invoice->price_1w) }}"
-                            placeholder="{{ __('messages.price_one_week') }}">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label class="form-label" for="price_2w">{{ __('messages.price_two_weeks') }} <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="price_2w" name="price_2w"
-                            value="{{ old('price_2w', $invoice->price_2w) }}"
-                            placeholder="{{ __('messages.price_two_weeks') }}">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label class="form-label" for="price_3w">{{ __('messages.price_three_weeks') }} <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="price_3w" name="price_3w"
-                            value="{{ old('price_3w', $invoice->price_3w) }}"
-                            placeholder="{{ __('messages.price_three_weeks') }}">
-                    </div>
-                </div>
-
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label class="form-label" for="price_4w">{{ __('messages.price_four_weeks') }} <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="price_4w" name="price_4w"
-                            value="{{ old('price_4w', $invoice->price_4w) }}"
-                            placeholder="{{ __('messages.price_four_weeks') }}">
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label class="form-label" for="price_8w">{{ __('messages.price_eight_weeks') }} <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="price_8w" name="price_8w"
-                            value="{{ old('price_8w', $invoice->price_8w) }}"
-                            placeholder="{{ __('messages.price_eight_weeks') }}">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label class="form-label"
-                            for="price_3m">{{ __('messages.price_three_months') }} <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="price_3m" name="price_3m"
-                            value="{{ old('price_3m', $invoice->price_3m) }}"
-                            placeholder="{{ __('messages.price_three_months') }}">
-                    </div>
-                </div>
-
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label class="form-label" for="price_6m">{{ __('messages.price_six_months') }} <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="price_6m" name="price_6m"
-                            value="{{ old('price_6m', $invoice->price_6m) }}"
-                            placeholder="{{ __('messages.price_six_months') }}">
-                    </div>
-                </div>
-
-                <div class="col-lg-3 d-none">
-                    <div class="form-group">
-                        <label class="form-label" for="price_9m">{{ __('messages.price_nine_months') }} <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="price_9m" name="price_9m"
-                            value="{{ old('price_9m', $invoice->price_9m) }}"
-                            placeholder="{{ __('messages.price_nine_months') }}">
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3 d-none">
-                <div class="col-lg-3 d-none">
-                    <div class="form-group">
-                        <label class="form-label" for="price_1y">{{ __('messages.price_one_year') }} <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="price_1y" name="price_1y"
-                            value="{{ old('price_1y', $invoice->price_1y) }}"
-                            placeholder="{{ __('messages.price_one_year') }}">
-                    </div>
-                </div>
-
-                <div class="col-lg-3 d-none">
-                    <div class="form-group">
-                        <label class="form-label" for="price_2y">{{ __('messages.price_two_years') }} <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="price_2y" name="price_2y"
-                            value="{{ old('price_2y', $invoice->price_2y) }}"
-                            placeholder="{{ __('messages.price_two_years') }}">
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label class="form-label" for="week_start">{{ __('messages.week_start') }} <span class="text-danger">*</span></label>
-                        <select class="form-control" id="week_start" name="week_start">
-                            @foreach($days as $d => $day)
-                                <option value="{{ $d }}" {{ old('week_start', $invoice->week_start) == $d ? 'selected' : '' }}>
-                                    {{ __($day) }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-lg-3">
-                    <div class="form-check form-switch">
-                        <label class="form-check-label" for="is_active">{{ __('messages.is_active') }}</label>
-                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active"
-                            {{ old('is_active', $invoice->is_active) ? 'checked' : '' }}>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="image">{{ __('messages.image') }} <span class="text-danger">*</span></label>
-                        <input type="file" class="form-control" id="image" name="image"
-                            value="{{ old('image', $invoice->image) }}">
-                    </div>
+                <div class="col-lg-2">
+                    <label class="form-label"
+                        for="inv_discount_per">{{ __('messages.invoice_discount_percentage') }}</label>
+                    <input type="number" step="0.01" class="form-control" id="inv_discount_per" name="inv_discount_per"
+                        value="{{ old('inv_discount_per', $invoice->inv_discount_per) }}"
+                        placeholder="{{ __('messages.invoice_discount_percentage') }}">
                 </div>
                 <div class="col-lg-2">
-                    @if ($invoice->image)
-                        <img src="{{ $invoice->imagePath }}" alt="{{ $invoice->name }}" class="img-fluid mt-2"
-                            style="max-width: 100px; max-height: 100px;">
-                    @endif
+                    <label class="form-label" for="tax_vat_per">{{ __('messages.tax_vat_percentage') }}</label>
+                    <input type="number" step="0.01" class="form-control" id="tax_vat_per" name="tax_vat_per"
+                        value="{{ old('tax_vat_per', $invoice->tax_vat_per) }}"
+                        placeholder="{{ __('messages.tax_vat_percentage') }}">
+                </div>
+                <div class="col-lg-2">
+                    <label class="form-label"
+                        for="tax_withdrawal_per">{{ __('messages.tax_withdrawal_percentage') }}</label>
+                    <input type="number" step="0.01" class="form-control" id="tax_withdrawal_per"
+                        name="tax_withdrawal_per" value="{{ old('tax_withdrawal_per', $invoice->tax_withdrawal_per) }}"
+                        placeholder="{{ __('messages.tax_withdrawal_percentage') }}">
                 </div>
             </div>
-
+        </div>
+        <div class="card-header">
+            <h4>{{ __('messages.invoice_items') }}</h4>
+        </div>
+       <div class="card-body">
+            <div id="invoice-items-list">
+                <!-- Item blocks will be added here -->
+                @php $itemIndex = 0; @endphp
+                @if(old('inv_items'))
+                    @foreach(old('inv_items') as $item)
+                        <div class="border rounded p-3 mb-2 position-relative invoice-item-block">
+                            <div class="row g-2">
+                                <div class="col-md-4">
+                                    <label class="form-label">{{ __('messages.item') }}</label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_name]" class="form-control" required value="{{ $item['item_name'] ?? '' }}">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">{{ __('messages.item_description') }}</label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_desc]" class="form-control" value="{{ $item['item_desc'] ?? '' }}">
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-md-1">
+                                    <label class="form-label">{{ __('messages.quantity') }}</label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_qty]" type="number" min="1" class="form-control item-qty" required value="{{ $item['item_qty'] ?? 1 }}">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">{{ __('messages.unit_amount') }}</label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_unit_amount]" type="number" min="0" class="form-control item-unit-amount" required value="{{ $item['item_unit_amount'] ?? 0 }}">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label">{{ __('messages.discount_percentage') }}</label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_discount_per]" type="number" min="0" class="form-control item-discount-per" value="{{ $item['item_discount_per'] ?? 0 }}">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">{{ __('messages.discount_amount') }}</label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_discount]" type="number" min="0" class="form-control item-discount" value="{{ $item['item_discount'] ?? 0 }}">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label"><b>{{ __('messages.total_amount') }}</b></label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_total_amount]" type="number" min="0" class="form-control item-total-amount" required readonly value="{{ $item['item_total_amount'] ?? 0 }}">
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-md-1 d-flex align-items-center">
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('.border').remove()">{{ __('messages.remove') }}</button>
+                                </div>
+                            </div>
+                        </div>
+                        @php $itemIndex++; @endphp
+                    @endforeach
+                @else
+                    @foreach($invoice->invoiceItems as $item)
+                        <div class="border rounded p-3 mb-2 position-relative invoice-item-block">
+                            <div class="row g-2">
+                                <div class="col-md-4">
+                                    <label class="form-label">{{ __('messages.item') }}</label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_name]" class="form-control" required value="{{ $item->item_name }}">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">{{ __('messages.item_description') }}</label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_desc]" class="form-control" value="{{ $item->item_desc }}">
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-md-1">
+                                    <label class="form-label">{{ __('messages.quantity') }}</label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_qty]" type="number" min="1" class="form-control item-qty" required value="{{ $item->item_qty }}">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">{{ __('messages.unit_amount') }}</label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_unit_amount]" type="number" min="0" class="form-control item-unit-amount" required value="{{ $item->item_unit_amount }}">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label">{{ __('messages.discount_percentage') }}</label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_discount_per]" type="number" step="0.01" min="0" class="form-control item-discount-per" value="{{ $item->item_discount_per }}">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">{{ __('messages.discount_amount') }}</label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_discount]" type="number" step="0.01" min="0" class="form-control item-discount" value="{{ $item->item_discount }}">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label"><b>{{ __('messages.total_amount') }}</b></label>
+                                    <input name="inv_items[{{ $itemIndex }}][item_total_amount]" type="number" min="0" class="form-control item-total-amount" required readonly value="{{ $item->item_total_amount }}">
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-md-1 d-flex align-items-center">
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('.border').remove()">{{ __('messages.remove') }}</button>
+                                </div>
+                            </div>
+                        </div>
+                        @php $itemIndex++; @endphp
+                    @endforeach
+                @endif
+            </div>
+            <button type="button" class="btn btn-success mt-2" id="add-item-btn">+ {{ __('messages.add_item') }}</button>
         </div>
 
 
@@ -187,7 +181,170 @@
             {{-- <button class="btn btn-secondary">Clear</button> --}}
         </div>
     </form>
-
     @push('scripts')
+        <script>
+            // Set itemIndex to last rendered item
+            let itemIndex = {{ isset($itemIndex) ? $itemIndex : 0 }};
+            document.getElementById('add-item-btn').addEventListener('click', function() {
+                const list = document.getElementById('invoice-items-list');
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'border rounded p-3 mb-2 position-relative';
+                itemDiv.innerHTML = `
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label class="form-label">{{ __('messages.item') }}</label>
+                            <input name="inv_items[${itemIndex}][item_name]" class="form-control" required>
+                        </div> 
+                        <div class="col-md-4">
+                            <label class="form-label">{{ __('messages.item_description') }}</label>
+                            <input name="inv_items[${itemIndex}][item_desc]" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md-1">
+                            <label class="form-label">{{ __('messages.quantity') }}</label>
+                            <input name="inv_items[${itemIndex}][item_qty]" type="number" min="1" class="form-control item-qty" required value="1">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">{{ __('messages.unit_amount') }}</label>
+                            <input name="inv_items[${itemIndex}][item_unit_amount]" type="number" min="0" class="form-control item-unit-amount" required value="0">
+                        </div> 
+                        <div class="col-md-1">
+                            <label class="form-label">{{ __('messages.discount_percentage') }}</label>
+                            <input name="inv_items[${itemIndex}][item_discount_per]" type="number" step="0.01" min="0" class="form-control item-discount-per" value="0">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">{{ __('messages.discount_amount') }}</label>
+                            <input name="inv_items[${itemIndex}][item_discount]" type="number" step="0.01" min="0" class="form-control item-discount" value="0">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label"><b>{{ __('messages.total_amount') }}</b></label>
+                            <input name="inv_items[${itemIndex}][item_total_amount]" type="number" min="0" class="form-control item-total-amount" required readonly value="0">
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md-1 d-flex align-items-center">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('.border').remove()">{{ __('messages.remove') }}</button>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(itemDiv);
+
+                // Add auto calculation logic
+                const qtyInput = itemDiv.querySelector('.item-qty');
+                const unitAmountInput = itemDiv.querySelector('.item-unit-amount');
+                const discountPerInput = itemDiv.querySelector('.item-discount-per');
+                const discountInput = itemDiv.querySelector('.item-discount');
+                const totalAmountInput = itemDiv.querySelector('.item-total-amount');
+
+                function setDiscountFieldsState() {
+                    const qty = parseFloat(qtyInput.value) || 0;
+                    const unitAmount = parseFloat(unitAmountInput.value) || 0;
+                    const enable = qty > 0 && unitAmount > 0;
+                    discountPerInput.disabled = !enable;
+                    discountInput.disabled = !enable;
+                }
+
+                function recalculateFromPer() {
+                    setDiscountFieldsState();
+                    const qty = parseFloat(qtyInput.value) || 1;
+                    const unitAmount = parseFloat(unitAmountInput.value) || 0;
+                    const discountPer = parseFloat(discountPerInput.value) || 0;
+                    const subtotal = qty * unitAmount;
+                    const discount = subtotal * (discountPer / 100);
+                    discountInput.value = discount.toFixed(2);
+                    totalAmountInput.value = (subtotal - discount).toFixed(2);
+                }
+
+                function recalculateFromAmount() {
+                    setDiscountFieldsState();
+                    const qty = parseFloat(qtyInput.value) || 1;
+                    const unitAmount = parseFloat(unitAmountInput.value) || 0;
+                    const discount = parseFloat(discountInput.value) || 0;
+                    const subtotal = qty * unitAmount;
+                    let discountPer = 0;
+                    if (subtotal > 0) {
+                        discountPer = (discount / subtotal) * 100;
+                    }
+                    discountPerInput.value = discountPer.toFixed(2);
+                    totalAmountInput.value = (subtotal - discount).toFixed(2);
+                }
+
+                qtyInput.addEventListener('input', function() {
+                    recalculateFromPer();
+                });
+                unitAmountInput.addEventListener('input', function() {
+                    recalculateFromPer();
+                });
+                discountPerInput.addEventListener('input', function() {
+                    recalculateFromPer();
+                });
+                discountInput.addEventListener('input', function() {
+                    recalculateFromAmount();
+                });
+                // Initial calculation
+                recalculateFromPer();
+                itemIndex++;
+            });
+
+            // On page load, auto-activate JS logic for old items
+            window.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.invoice-item-block').forEach(function(itemDiv) {
+                    const qtyInput = itemDiv.querySelector('.item-qty');
+                    const unitAmountInput = itemDiv.querySelector('.item-unit-amount');
+                    const discountPerInput = itemDiv.querySelector('.item-discount-per');
+                    const discountInput = itemDiv.querySelector('.item-discount');
+                    const totalAmountInput = itemDiv.querySelector('.item-total-amount');
+
+                    function setDiscountFieldsState() {
+                        const qty = parseFloat(qtyInput.value) || 0;
+                        const unitAmount = parseFloat(unitAmountInput.value) || 0;
+                        const enable = qty > 0 && unitAmount > 0;
+                        discountPerInput.disabled = !enable;
+                        discountInput.disabled = !enable;
+                    }
+
+                    function recalculateFromPer() {
+                        setDiscountFieldsState();
+                        const qty = parseFloat(qtyInput.value) || 1;
+                        const unitAmount = parseFloat(unitAmountInput.value) || 0;
+                        const discountPer = parseFloat(discountPerInput.value) || 0;
+                        const subtotal = qty * unitAmount;
+                        const discount = subtotal * (discountPer / 100);
+                        discountInput.value = discount.toFixed(2);
+                        totalAmountInput.value = (subtotal - discount).toFixed(2);
+                    }
+
+                    function recalculateFromAmount() {
+                        setDiscountFieldsState();
+                        const qty = parseFloat(qtyInput.value) || 1;
+                        const unitAmount = parseFloat(unitAmountInput.value) || 0;
+                        const discount = parseFloat(discountInput.value) || 0;
+                        const subtotal = qty * unitAmount;
+                        let discountPer = 0;
+                        if (subtotal > 0) {
+                            discountPer = (discount / subtotal) * 100;
+                        }
+                        discountPerInput.value = discountPer.toFixed(2);
+                        totalAmountInput.value = (subtotal - discount).toFixed(2);
+                    }
+
+                    qtyInput.addEventListener('input', function() {
+                        recalculateFromPer();
+                    });
+                    unitAmountInput.addEventListener('input', function() {
+                        recalculateFromPer();
+                    });
+                    discountPerInput.addEventListener('input', function() {
+                        recalculateFromPer();
+                    });
+                    discountInput.addEventListener('input', function() {
+                        recalculateFromAmount();
+                    });
+                    // Initial calculation
+                    recalculateFromPer();
+                });
+            });
+        </script>
     @endpush
 @endsection

@@ -24,19 +24,15 @@ trait GeneralHelper
         ];
     }
 
-    public function coursesPeriods()
+    public function paymentMethods()
     {
         return [
-            ['name' => __('messages.one_week'), 'value' => '1w'],
-            ['name' => __('messages.two_weeks'), 'value' => '2w'],
-            ['name' => __('messages.three_weeks'), 'value' => '3w'],
-            ['name' => __('messages.four_weeks'), 'value' => '4w'],
-            ['name' => __('messages.eight_weeks'), 'value' => '8w'],
-            ['name' => __('messages.three_months'), 'value' => '3m'],
-            ['name' => __('messages.six_months'), 'value' => '6m'],
-            ['name' => __('messages.nine_months'), 'value' => '9m'],
-            // ['name' => __('messages.one_year'), 'value' => '1y'],
-            // ['name' => __('messages.two_years'), 'value' => '2y']
+            'cash' => __('messages.cash'),
+            // 'credit_card' => __('messages.credit_card'),
+            'bank_transfer' => __('messages.bank_transfer'),
+            'check' => __('messages.check'),
+            'mobile_payment' => __('messages.mobile_payment'),
+            //'other' => __('messages.other')
         ];
     }
 }
