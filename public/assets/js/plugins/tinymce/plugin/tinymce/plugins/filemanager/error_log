@@ -1,0 +1,33 @@
+[14-Dec-2022 15:45:11 America/Chicago] PHP Warning:  Undefined array key "fldr" in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/dialog.php on line 116
+[14-Dec-2022 15:48:41 America/Chicago] PHP Warning:  Undefined array key "fldr" in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/dialog.php on line 116
+[14-Dec-2022 15:49:30 America/Chicago] PHP Warning:  move_uploaded_file(/home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/../../../../../../../../../storage/pub/sources//review-2-img-1.png): Failed to open stream: No such file or directory in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/upload.php on line 24
+[14-Dec-2022 15:49:30 America/Chicago] PHP Warning:  move_uploaded_file(): Unable to move &quot;/tmp/phppUbUoZ&quot; to &quot;/home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/../../../../../../../../../storage/pub/sources//review-2-img-1.png&quot; in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/upload.php on line 24
+[14-Dec-2022 15:50:55 America/Chicago] PHP Warning:  move_uploaded_file(/home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/../../../../../../../../storage/pub/sources//latest_properties_img_3.jpg): Failed to open stream: No such file or directory in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/upload.php on line 24
+[14-Dec-2022 15:50:55 America/Chicago] PHP Warning:  move_uploaded_file(): Unable to move &quot;/tmp/phpYeWZK6&quot; to &quot;/home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/../../../../../../../../storage/pub/sources//latest_properties_img_3.jpg&quot; in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/upload.php on line 24
+[14-Dec-2022 16:02:53 America/Chicago] PHP Fatal error:  Uncaught Error: Object of class GdImage could not be converted to string in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/php_image_magician.php:326
+Stack trace:
+#0 /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/utils.php(19): imageLib->resizeImage(122, 91, 'crop')
+#1 /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/dialog.php(302): create_img_gd('/home5/karamtas...', '../../../../../...', 122, 91)
+#2 {main}
+  thrown in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/php_image_magician.php on line 326
+[14-Dec-2022 16:02:55 America/Chicago] PHP Fatal error:  Uncaught Error: Object of class GdImage could not be converted to string in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/php_image_magician.php:326
+Stack trace:
+#0 /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/utils.php(19): imageLib->resizeImage(122, 91, 'crop')
+#1 /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/dialog.php(302): create_img_gd('/home5/karamtas...', '../../../../../...', 122, 91)
+#2 {main}
+  thrown in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/php_image_magician.php on line 326
+[14-Dec-2022 16:04:29 America/Chicago] PHP Fatal error:  Uncaught Error: Object of class GdImage could not be converted to string in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/php_image_magician.php:326
+Stack trace:
+#0 /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/utils.php(19): imageLib->resizeImage(122, 91, 'crop')
+#1 /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/dialog.php(302): create_img_gd('/home5/karamtas...', '../../../../../...', 122, 91)
+#2 {main}
+  thrown in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/php_image_magician.php on line 326
+[14-Dec-2022 16:04:30 America/Chicago] PHP Fatal error:  Uncaught Error: Object of class GdImage could not be converted to string in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/php_image_magician.php:326
+Stack trace:
+#0 /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/utils.php(19): imageLib->resizeImage(122, 91, 'crop')
+#1 /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/dialog.php(302): create_img_gd('/home5/karamtas...', '../../../../../...', 122, 91)
+#2 {main}
+  thrown in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/php_image_magician.php on line 326
+[14-Dec-2022 16:05:26 America/Chicago] PHP Warning:  Array to string conversion in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/php_image_magician.php on line 329
+[14-Dec-2022 16:05:27 America/Chicago] PHP Warning:  Array to string conversion in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/php_image_magician.php on line 329
+[14-Dec-2022 16:46:59 America/Chicago] PHP Warning:  Undefined array key "fldr" in /home5/karamtas/public_html/public/admin-assets/vendors/js/editors/tinymce/plugin/tinymce/plugins/filemanager/dialog.php on line 117
