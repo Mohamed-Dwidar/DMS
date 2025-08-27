@@ -18,52 +18,39 @@
          margin: 0 auto;
          background: #fff;
          padding: 2rem;
-         border-radius: 12px;
-         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
          font-family: 'Segoe UI', Arial, sans-serif;
      }
 
      .invoice-header {
-         display: flex;
-         justify-content: space-between;
-         align-items: flex-start;
-         margin-bottom: 2rem;
+         /* display: flex; */
+         /* justify-content: space-between; */
+         /* align-items: flex-start; */
+         /* margin-bottom: 2rem; */
+         font-size: 0.97rem;
+     }
+
+     .company-info {
+         float: left;
+         width: 60%;
      }
 
      .invoice-logo {
-         align-self: flex-start;
          width: 200px;
          height: 100px;
-         /* background: #e3f2fd; */
-         display: flex;
          align-items: center;
          justify-content: center;
          font-size: 2rem;
          font-weight: bold;
          color: #1976d2;
-         border-radius: 10px;
          margin-bottom: .9rem;
-         padding-left: 11px;
-     }
-
-     .invoice-logo img {
-         max-width: 100%;
-         max-height: 100%;
-         display: block;
-         margin: 0 auto;
-     }
-
-     .invoice-company-details {
-         color: #333;
-         font-size: 0.97rem;
-         line-height: 1.3;
-         margin-left: 0.5rem;
      }
 
      .invoice-title-block {
          text-align: right;
          min-width: 137px;
-         margin-top: 28px;
+         margin-top: 100px;
+         float: right;
+         width: 30%;
      }
 
      .invoice-title {
@@ -88,7 +75,6 @@
          color: #1976d2;
          font-weight: bold;
          font-size: 1rem;
-         /* letter-spacing: 1px; */
      }
 
      .invoice-client-name {
@@ -143,6 +129,8 @@
      .invoice-summary {
          text-align: right;
          margin-bottom: 2rem;
+         float: right;
+         width: 25%;
      }
 
      .invoice-summary-row {
@@ -154,22 +142,28 @@
          font-weight: bold;
          color: #1976d2;
          font-size: 1.3rem;
+         border-top: 1px solid #e0e0e0;
+         margin-top: 1rem;
+         padding-bottom: 1rem;
+            padding-top: 1rem;
+
      }
 
      .invoice-footer {
-         margin-top: 5rem;
+         float: right;
+         width: 100%;
+         margin-top: 0rem;
          text-align: right;
-         margin-bottom: 9rem;
+         margin-bottom: 10rem;
      }
 
      .invoice-signature {
-         color: #1976d2;
          font-weight: bold;
          font-size: 1.1rem;
          /* border-top: 2px solid #1976d2; */
          /* width: 220px; */
          margin: 3rem 3rem 0 auto;
-         padding-top: 1rem;
+         padding-top: 0rem;
      }
 
      .thanks-note {
@@ -199,8 +193,8 @@
 
  <div class="invoice-invoice-container">
      <div class="invoice-header">
-         <div>
-             <div class="invoice-logo" style="margin-bottom: 0.5rem;">
+         <div class="company-info">
+             <div class="invoice-logo">
                  <img src="{{ public_path('assets/images/logo-h.png') }}" alt="Logo">
              </div>
              <div class="invoice-company-details">
@@ -219,10 +213,15 @@
              <div class="invoice-meta"><b>DATE :</b> {{ $invoice->inv_date }}</div>
          </div>
      </div>
+
+
      <div class="invoice-bill-section">
          <div class="invoice-bill-label">FOR</div>
          <div class="invoice-client-name">{{ $invoice->inv_for }}</div>
      </div>
+
+
+
      <table class="invoice-table">
          <thead>
              <tr>
@@ -247,7 +246,9 @@
      </table>
      <div class="invoice-summary">
          <div class="invoice-summary-row"><b>Subtotal :</b> {{ $invoice->inv_amount }} LE</div>
-         <div class="invoice-summary-row"><b>Tax VAT :</b> {{ $invoice->tax_vat }} LE</div>
+         {{-- @if ($invoice->tax_vat > 0) --}}
+             <div class="invoice-summary-row"><b>Tax VAT :</b> {{ $invoice->tax_vat }} LE</div>
+         {{-- @endif --}}
          <div class="invoice-summary-row total">Total : {{ $invoice->inv_total_amount }} LE</div>
      </div>
      <div class="invoice-footer">
